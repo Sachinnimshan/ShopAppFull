@@ -1,0 +1,22 @@
+{
+  "name": "shopamz",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch Backend --exec node --experimental-modules Backend/Server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sachin Nimshan",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.11.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
