@@ -1,11 +1,15 @@
-import express from 'express';
+import express, { urlencoded } from 'express';
 // import Data from './Data.js';
 import mongoose from 'mongoose';
 import UserRouter from './Routes/UserRouter.js';
 import ProductRouter from './Routes/ProductRouter.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 mongoose.connect('mongodb://localhost/snshop',{
     useCreateIndex: true,
