@@ -2,22 +2,18 @@ import mongoose from 'mongoose';
 
 const OrderSchema = new mongoose.Schema({
     OrderItems : [{
-        Name: {type: String, required: true},
-        qty: {type: String, required: true},
+        Title: {type: String, required: true},
+        qty: {type: Number, required: true},
         Image: {type: String, required: true},
-        Price: {type: String, required: true},
-        product: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product',
-            required: true
-        }
+        Price: {type: Number, required: true},
+        product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product',required: true}
     }],
     ShippingAddress :{
         FullName: {type: String, required: true},
         Address: {type: String, required: true},
         Postalcode: {type: Number, required: true},
         City: {type: String, required: true},
-        Country: {type: String, required: true}
+        Country: {type: String, required: true},
     },
     PaymentMethod: {type: String, required: true},
     ItemsPrice: {type: Number, required: true},

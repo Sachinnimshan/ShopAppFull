@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import UserRouter from './Routes/UserRouter.js';
 import ProductRouter from './Routes/ProductRouter.js';
 import dotenv from 'dotenv';
+import OrderRouter from './Routes/OrderRouter.js';
 
 dotenv.config();
 
@@ -17,9 +18,6 @@ mongoose.connect('mongodb://localhost/snshop',{
     useNewUrlParser: true
 });
 
-app.get('/', (req, res)=>{
-    res.send("Server is Ready"); 
-});
 
 // app.get('/api/products/:id', (req,res)=>{
 //  const product = Data.ProductData.find((x)=> x._id === req.params.id);
@@ -36,6 +34,15 @@ app.get('/', (req, res)=>{
 
 app.use('/api/users', UserRouter);
 app.use('/api/products', ProductRouter);
+app.use('/api/orders', OrderRouter);
+
+app.get('/api/config/paypal', (req,res)=>{
+    res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
+
+app.get('/', (req, res)=>{
+    res.send("Server is Ready"); 
+});
 
 
 const PORT = process.env.PORT || 5000;
