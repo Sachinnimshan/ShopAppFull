@@ -16,6 +16,12 @@ const OrderSchema = new mongoose.Schema({
         Country: {type: String, required: true},
     },
     PaymentMethod: {type: String, required: true},
+    PaymentResults: {
+        id: String,
+        Status: String,
+        Update_Time: String,
+        Email_Address: String,
+    },
     ItemsPrice: {type: Number, required: true},
     ShippingPrice: {type: Number, required: true},
     TaxPrice: {type: Number, required: true},

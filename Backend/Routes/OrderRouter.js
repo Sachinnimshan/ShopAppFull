@@ -36,4 +36,22 @@ OrderRouter.get('/:id', IsAuth, expressAsyncHandler(async(req,res)=>{
     }
 }));
 
+OrderRouter.put('/:id/pay', IsAuth, expressAsyncHandler(async(req,res)=>{
+    const order = await Order.findById(req.params.id);
+    if(order){
+        order.IsPaid = true;
+        order.PaidAt = Date.now();
+        order.PaymentResult = {
+            id: req.body.id,
+            Status: req.body.Status,
+            Update_Time: req.body.Update_Time,
+            Email_Address: req.body.Email_Address
+        };
+    const UpdatedOrder = await order.save();
+    res.send({message: 'Order Paid', order: UpdatedOrder});
+    }else{
+        res.status(404).send({message: 'Order Not Found'});
+    }
+}))
+
 export default OrderRouter;
