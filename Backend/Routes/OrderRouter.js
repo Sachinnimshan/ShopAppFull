@@ -5,6 +5,14 @@ import Order from '../Models/OrderModel.js';
 
 const OrderRouter = express.Router();
 
+OrderRouter.get('/mine', IsAuth, expressAsyncHandler(async(req,res)=>{
+    const orders = await Order.find({user: req.user._id});
+    if(orders){
+        res.send(orders);
+    }else{
+        res.status(404).send({message: 'No Orders Found'});
+    }
+}))
 
 OrderRouter.post('/', IsAuth, expressAsyncHandler(async(req,res)=>{
     if(req.body.OrderItems.length === 0){
@@ -53,5 +61,8 @@ OrderRouter.put('/:id/pay', IsAuth, expressAsyncHandler(async(req,res)=>{
         res.status(404).send({message: 'Order Not Found'});
     }
 }))
+
+
+
 
 export default OrderRouter;
