@@ -17,7 +17,8 @@ export const IsAuth=(req, res, next)=>{
     const authorization = req.headers.authorization;
     if(authorization){
         const Token = authorization.slice(7, authorization.length);
-        jwt.verify(Token, process.env.JWT_SECRET || 'SomethingSecret', (err, decode)=>{
+        jwt.verify(Token, process.env.JWT_SECRET || 'SomethingSecret', 
+        (err, decode)=>{
             if(err){
                 res.status(401).send({message: 'Invalid Token'});
             }else{
@@ -27,5 +28,13 @@ export const IsAuth=(req, res, next)=>{
         })
     }else{
         res.status(401).send({message: "No Token"});
+    }
+}
+
+export const IsAdmin=(req,res,next)=>{
+    if(req.user && req.user.IsAdmin){
+        return next();
+    }else{
+        return res.status(401).send({message: 'Invalid Admin Token'});
     }
 }
