@@ -59,6 +59,15 @@ UserRouter.get('/:id', expressAsyncHandler(async(req,res)=>{
     }
 }))
 
+UserRouter.get('/', IsAuth, expressAsyncHandler(async(req,res)=>{
+    const users = await User.find({});
+    if(users){
+        res.send(users);
+    }else{
+        res.status(404).send({message: 'Users Not Found'});
+    }
+}))
+
 UserRouter.put('/profile', IsAuth, expressAsyncHandler(async(req,res)=>{
     const user = await User.findById(req.user._id);
     if(user){
